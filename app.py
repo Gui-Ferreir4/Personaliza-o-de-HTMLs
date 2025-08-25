@@ -8,6 +8,33 @@ st.set_page_config(page_title="Personalizar HTML", layout="wide")
 
 st.title("📄 Personalizar HTML com CSV")
 
+def mostrar_explicacao_modo_padrao():
+    st.markdown("### 📌 Modo Padrão: Um único HTML (todas as linhas)")
+
+    st.write("""
+    Neste modo, o aplicativo **gera apenas um arquivo HTML consolidado**.  
+    Todas as linhas do arquivo CSV são processadas juntas e incluídas em **um único HTML**.  
+    Isso é útil quando você deseja ter uma única peça de e-mail marketing contendo todas as variações.  
+    """)
+
+    # Exibição da imagem de exemplo (sua tabela explicativa)
+    st.image("753f330f-3571-4788-94c9-e82bb6df20ed.png", caption="Exemplo do modo padrão (consolidação de todas as linhas em um único HTML)", use_column_width=True)
+
+    # Legenda adicional com cores
+    st.markdown("""
+    🔹 **Linha Azul** → Identifica os cabeçalhos do CSV.  
+    🔹 **Linha Verde** → Representa o conteúdo consolidado que será inserido no HTML.  
+    🔹 **Linhas Laranja** → São as variações, todas agrupadas no mesmo arquivo HTML.  
+    """)
+
+# Exemplo de uso no fluxo do app
+if "modo" not in st.session_state:
+    st.session_state["modo"] = "padrao"
+
+if st.session_state["modo"] == "padrao":
+    mostrar_explicacao_modo_padrao()
+
+
 st.markdown("""
 Este app substitui **TAGs personalizadas** em um arquivo HTML com valores de um arquivo CSV.
 - As TAGs devem estar no formato `<#Coluna01>`, `<#Coluna02>`, etc.
