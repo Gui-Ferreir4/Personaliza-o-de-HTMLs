@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import streamlit as st
 import io
+import zipfile
 
 st.set_page_config(page_title="Personalizar HTML", layout="wide")
 
@@ -41,11 +42,13 @@ def substituir_tags(conteudo_html, dados_csv):
 
 if arquivo_csv and arquivo_html:
     try:
-        # Ler o CSV
+        # Resetar ponteiro do CSV e ler
+        arquivo_csv.seek(0)
         dados_csv = pd.read_csv(arquivo_csv, sep=sep)
         dados_csv.columns = [col.strip() for col in dados_csv.columns]
 
-        conteudo_html = arquivo_html.read().decode("utf-8")
+        # Ler HTML corretamente (sem perder buffer)
+        conteudo_html = arquivo_html.getvalue().decode("utf-8")
 
         modo = st.radio(
             "Modo de saída:",
@@ -56,7 +59,6 @@ if arquivo_csv and arquivo_html:
             if modo.startswith("🔹 Um único"):
                 conteudo_modificado, relatorio = substituir_tags(conteudo_html, dados_csv)
 
-                # Resultado
                 st.success("✅ HTML modificado com sucesso!")
                 st.download_button(
                     label="📥 Baixar HTML modificado",
@@ -76,7 +78,6 @@ if arquivo_csv and arquivo_html:
 
             else:
                 arquivos_zip = io.BytesIO()
-                import zipfile
                 with zipfile.ZipFile(arquivos_zip, mode="w") as zf:
                     for i in range(len(dados_csv)):
                         html_linha, _ = substituir_tags(conteudo_html, dados_csv.iloc[[i]])
