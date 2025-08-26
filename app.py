@@ -8,25 +8,6 @@ st.set_page_config(page_title="Personalizar HTML", layout="wide")
 
 st.title("📄 Personalizar HTML com CSV")
 
-st.markdown("### 📌 Modo Padrão: Um único HTML (todas as linhas)")
-
-st.write("""
-Neste modo, o aplicativo **gera apenas um arquivo HTML consolidado**.  
-Todas as linhas do arquivo CSV são processadas juntas e incluídas em **um único HTML**.  
-Isso é útil quando você deseja ter uma única peça de e-mail marketing contendo todas as variações.  
-""")
-
-# Exibição da imagem de exemplo (sua tabela explicativa)
-st.image("753f330f-3571-4788-94c9-e82bb6df20ed.png", caption="Exemplo do modo padrão (consolidação de todas as linhas em um único HTML)", use_column_width=True)
-
-# Legenda adicional com cores
-st.markdown("""
-🔹 **Linha Azul** → Identifica os cabeçalhos do CSV.  
-🔹 **Linha Verde** → Representa o conteúdo consolidado que será inserido no HTML.  
-🔹 **Linhas Laranja** → São as variações, todas agrupadas no mesmo arquivo HTML.  
-""")
-
-
 # Escolher separador
 sep = st.radio("Selecione o separador do CSV:", options=[";", ","], horizontal=True)
 
