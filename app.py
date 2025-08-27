@@ -24,32 +24,32 @@ As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o n√
 st.markdown("""
 <table style="border-collapse: collapse; width: 100%; text-align: center;">
   <tr>
-  	<th style="border: 1px solid black; padding: 8px; background-color: #666e64;">LINHA CSV</th>
+  	<th style="border: 1px solid black; padding: 8px; background-color: #056928;">LINHA CSV</th>
    	<th style="border: 1px solid black; padding: 8px;"></th>
-	<th style="border: 1px solid black; padding: 8px; background-color: #740510;">NOME_PROD</th>
-	<th style="border: 1px solid black; padding: 8px; background-color: #740510;">FOTOPROD</th>
-	<th style="border: 1px solid black; padding: 8px; background-color: #740510;">BANNER</th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">NOME_PROD</th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">FOTOPROD</th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">BANNER</th>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">01</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #056928;">01</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#NOMEPROD01></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#FOTOPROD01></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#BANNER01></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#NOMEPROD01></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#FOTOPROD01></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#BANNER01></td>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">02</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #056928;">02</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#NOMEPROD02></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#FOTOPROD02></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#BANNER02></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#NOMEPROD02></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#FOTOPROD02></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#BANNER02></td>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">03</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #056928;">03</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#NOMEPROD03></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#FOTOPROD03></td>
-	<td style="border: 1px solid black; padding: 8px;background-color: #1c0677;"><#BANNER03></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#NOMEPROD03></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#FOTOPROD03></td>
+	<td style="border: 1px solid black; padding: 8px;background-color: #084aa0;"><#BANNER03></td>
   </tr>
 </table>
 """, unsafe_allow_html=True)
