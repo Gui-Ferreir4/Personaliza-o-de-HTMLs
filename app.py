@@ -24,28 +24,28 @@ As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o n√
 st.markdown("""
 <table style="border-collapse: collapse; width: 100%; text-align: center;">
   <tr>
-  	<th style="border: 1px solid black; padding: 8px; background-color: #d9ead3;">LINHA CSV</th>
+  	<th style="border: 1px solid black; padding: 8px; background-color: #666e64;">LINHA CSV</th>
    	<th style="border: 1px solid black; padding: 8px;"></th>
 	<th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;">NOME_PROD</th>
 	<th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;">FOTOPROD</th>
 	<th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;">BANNER</th>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #d9ead3;">01</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">01</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#NOMEPROD01></td>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#FOTOPROD01></td>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#BANNER01></td>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #d9ead3;">02</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">02</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#NOMEPROD02></td>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#FOTOPROD02></td>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#BANNER02></td>
   </tr>
   <tr>
-  	<td style="border: 1px solid black; padding: 8px;background-color: #d9ead3;">03</td>
+  	<td style="border: 1px solid black; padding: 8px;background-color: #666e64;">03</td>
    	<th style="border: 1px solid black; padding: 8px;"></th>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#NOMEPROD03></td>
 	<td style="border: 1px solid black; padding: 8px;background-color: #cfe2f3;"><#FOTOPROD03></td>
