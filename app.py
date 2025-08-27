@@ -8,12 +8,18 @@ st.set_page_config(page_title="Personalizar HTML", layout="wide")
 
 st.title("📄 Personalizar HTML com CSV")
 
-# Escolher separador
-sep = st.radio("Selecione o separador do CSV:", options=[";", ","], horizontal=True)
 
-# Upload dos arquivos
-arquivo_csv = st.file_uploader("📄 Selecione o arquivo CSV", type=["csv"])
-arquivo_html = st.file_uploader("🌐 Selecione o arquivo HTML", type=["html", "htm"])
+# Legenda
+st.markdown("""
+O App localiza a TAG no HTML e busca pelo nome da coluna e número da linha correspondente no arquivo CSV. 
+O cabeçalho do CSV deve ser escrito em letras maiúculas e sem espaços, pode-se utilizar underscore para espaçamento. 
+As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o número da oferta. As TAGS devem seguir o padrão já conhecido <#TAG>, escrito em letras maiúsculas e sem espaços.
+
+**Legenda de cores:**
+- 🟥 Vermelho claro → **CABEÇALHO DA PLANILHA (CSV)** 
+- 🟦 Azul claro → **TAGS DO AQUIVO HTML**  
+- 🟩 Verde claro → **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)**
+""")
 
 st.markdown("""
 <table style="border-collapse: collapse; width: 100%; text-align: center;">
@@ -40,17 +46,14 @@ st.markdown("""
 </table>
 """, unsafe_allow_html=True)
 
-# Legenda
-st.markdown("""
-O App localiza a TAG no HTML e busca pelo nome da coluna e número da linha correspondente no arquivo CSV. 
-O cabeçalho do CSV deve ser escrito em letras maiúculas e sem espaços, pode-se utilizar underscore para espaçamento. 
-As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o número da oferta. As TAGS devem seguir o padrão já conhecido <#TAG>, escrito em letras maiúsculas e sem espaços.
 
-**Legenda de cores:**
-- 🟥 Vermelho claro → **CABEÇALHO DA PLANILHA (CSV)** 
-- 🟦 Azul claro → **TAGS DO AQUIVO HTML**  
-- 🟩 Verde claro → **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)**
-""")
+# Escolher separador
+sep = st.radio("Selecione o separador do CSV:", options=[";", ","], horizontal=True)
+
+# Upload dos arquivos
+arquivo_csv = st.file_uploader("📄 Selecione o arquivo CSV", type=["csv"])
+arquivo_html = st.file_uploader("🌐 Selecione o arquivo HTML", type=["html", "htm"])
+
 
 # Função para substituir tags
 def substituir_tags(conteudo_html, dados_csv):
