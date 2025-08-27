@@ -16,9 +16,10 @@ O cabeçalho do CSV deve ser escrito em letras maiúculas e sem espaços, pode-s
 As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o número da oferta. As TAGS devem seguir o padrão já conhecido <#TAG>, escrito em letras maiúsculas e sem espaços.
 
 **Legenda de cores:**
-- 🟥 Vermelho claro → **CABEÇALHO DA PLANILHA (CSV)** 
-- 🟦 Azul claro → **TAGS DO AQUIVO HTML**  
-- 🟩 Verde claro → **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)**
+- 🟩 **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)** → Indicador da contagem de linhas, para identificação das ofertas. (Não é encessário incluir a coluna "Linhas" no arquivo CSV)
+- 🟥 **CABEÇALHO DA PLANILHA (CSV)** → Deve ser escrito em letras maiúsculas, sem espaços ou caracteres especiais. 
+- 🟦 **TAGS DO AQUIVO HTML** → Deve seguir o mesmo padrão de escrita do cabeçalho CSV, incluindo a numeração da linha correspondente ao final da TAG. 
+
 """)
 
 st.markdown("""
