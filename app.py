@@ -16,41 +16,41 @@ arquivo_csv = st.file_uploader("📄 Selecione o arquivo CSV", type=["csv"])
 arquivo_html = st.file_uploader("🌐 Selecione o arquivo HTML", type=["html", "htm"])
 
 st.markdown("""
-    <table style="border-collapse: collapse; width: 100%; text-align: center;">
-      <tr>
-        <th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;"><#NOME_PROD></th>
-        <th style="border: 1px solid black; padding: 8px; background-color: #cfe2f3;"><#FOTOPROD></th>
-        <th style="border: 1px solid black; padding: 8px; background-color: #d9ead3;"><#BANNER></th>
-      </tr>
-      <tr>
-        <td style="border: 1px solid black; padding: 8px;">NOMEPROD01</td>
-        <td style="border: 1px solid black; padding: 8px;">FOTOPROD01</td>
-        <td style="border: 1px solid black; padding: 8px;">BANNER01</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid black; padding: 8px;">NOMEPROD02</td>
-        <td style="border: 1px solid black; padding: 8px;">FOTOPROD02</td>
-        <td style="border: 1px solid black; padding: 8px;">BANNER02</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid black; padding: 8px;">NOMEPROD03</td>
-        <td style="border: 1px solid black; padding: 8px;">FOTOPROD03</td>
-        <td style="border: 1px solid black; padding: 8px;">BANNER03</td>
-      </tr>
-    </table>
-    """, unsafe_allow_html=True)
+<table style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr>
+	<th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;"><#NOME_PROD></th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #cfe2f3;"><#FOTOPROD></th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #d9ead3;"><#BANNER></th>
+  </tr>
+  <tr>
+	<td style="border: 1px solid black; padding: 8px;">NOMEPROD01</td>
+	<td style="border: 1px solid black; padding: 8px;">FOTOPROD01</td>
+	<td style="border: 1px solid black; padding: 8px;">BANNER01</td>
+  </tr>
+  <tr>
+	<td style="border: 1px solid black; padding: 8px;">NOMEPROD02</td>
+	<td style="border: 1px solid black; padding: 8px;">FOTOPROD02</td>
+	<td style="border: 1px solid black; padding: 8px;">BANNER02</td>
+  </tr>
+  <tr>
+	<td style="border: 1px solid black; padding: 8px;">NOMEPROD03</td>
+	<td style="border: 1px solid black; padding: 8px;">FOTOPROD03</td>
+	<td style="border: 1px solid black; padding: 8px;">BANNER03</td>
+  </tr>
+</table>
+""", unsafe_allow_html=True)
 
-    # Legenda
-    st.markdown("""
-	O App localiza a TAG no HTML e busca pelo nome da coluna e número da linha correspondente no arquivo CSV. 
-	O cabeçalho do CSV deve ser escrito em letras maiúculas e sem espaços, pode-se utilizar underscore para espaçamento. 
-	As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o número da oferta. As TAGS devem seguir o padrão já conhecido <#TAG>, escrito em letras maiúsculas e sem espaços.
-    
-	**Legenda de cores:**
-    - 🟥 Vermelho claro → **CABEÇALHO DA PLANILHA (CSV)** 
-    - 🟦 Azul claro → **TAGS DO AQUIVO HTML**  
-    - 🟩 Verde claro → **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)**
-    """)
+# Legenda
+st.markdown("""
+O App localiza a TAG no HTML e busca pelo nome da coluna e número da linha correspondente no arquivo CSV. 
+O cabeçalho do CSV deve ser escrito em letras maiúculas e sem espaços, pode-se utilizar underscore para espaçamento. 
+As TAGS disponiveis no HTML deve estar devidamente enumeradas de acordo com o número da oferta. As TAGS devem seguir o padrão já conhecido <#TAG>, escrito em letras maiúsculas e sem espaços.
+
+**Legenda de cores:**
+- 🟥 Vermelho claro → **CABEÇALHO DA PLANILHA (CSV)** 
+- 🟦 Azul claro → **TAGS DO AQUIVO HTML**  
+- 🟩 Verde claro → **CONTAGEM DE LINHAS DAS OFERTAS NA PLANILHA (IGNORANDO CABEÇAÇHO)**
+""")
 
 # Função para substituir tags
 def substituir_tags(conteudo_html, dados_csv):
