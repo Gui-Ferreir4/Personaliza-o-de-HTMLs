@@ -27,7 +27,7 @@ st.markdown("""
   <tr>
   	<th style="border: 1px solid black; padding: 8px; background-color: #056928;">LINHA CSV</th>
    	<th style="border: 1px solid black; padding: 8px;"></th>
-	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">NOME_PROD</th>
+	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">NOMEPROD</th>
 	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">FOTOPROD</th>
 	<th style="border: 1px solid black; padding: 8px; background-color: #ab081e;">BANNER</th>
   </tr>
