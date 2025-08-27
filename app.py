@@ -1,94 +1,129 @@
+import streamlit as st
 import pandas as pd
 import re
-import streamlit as st
-import io
-import zipfile
 
-st.set_page_config(page_title="Personalizar HTML", layout="wide")
+# =========================
+# Funções principais
+# =========================
+def substituir_tags(template_html, linha):
+    """
+    Substitui as TAGs no HTML com os valores do CSV.
+    Se o valor estiver vazio, substitui por string vazia.
+    """
+    resultado = template_html
+    for coluna, valor in linha.items():
+        placeholder = f"##{coluna}##"
+        if pd.isna(valor):
+            valor = ""  # Substitui vazio
+        resultado = resultado.replace(placeholder, str(valor))
+    return resultado
 
-st.title("📄 Personalizar HTML com CSV")
+def gerar_html_unico(df, template_html):
+    """
+    Gera um único HTML com todas as linhas do CSV.
+    """
+    html_final = ""
+    for _, linha in df.iterrows():
+        html_final += substituir_tags(template_html, linha) + "\n\n"
+    return html_final
 
-# Escolher separador
-sep = st.radio("Selecione o separador do CSV:", options=[";", ","], horizontal=True)
+def gerar_varios_htmls(df, template_html):
+    """
+    Gera vários HTMLs, um por linha do CSV.
+    """
+    htmls = []
+    for _, linha in df.iterrows():
+        htmls.append(substituir_tags(template_html, linha))
+    return htmls
 
-# Upload dos arquivos
-arquivo_csv = st.file_uploader("📄 Selecione o arquivo CSV", type=["csv"])
-arquivo_html = st.file_uploader("🌐 Selecione o arquivo HTML", type=["html", "htm"])
+# =========================
+# Layout do App
+# =========================
+st.set_page_config(page_title="Gerador de HTMLs", layout="wide")
+st.title("📧 Gerador de HTMLs a partir de CSV")
 
-# Função para substituir tags
-def substituir_tags(conteudo_html, dados_csv):
-    substituicoes = []
-    for linha in range(len(dados_csv)):
-        for coluna in dados_csv.columns:
-            tag = f'<#{coluna}{"{:02d}".format(linha + 1)}>'
-            valor = "" if pd.isna(dados_csv[coluna].iloc[linha]) else str(dados_csv[coluna].iloc[linha])
-            novo_html, n_subs = re.subn(re.escape(tag), valor, conteudo_html)
-            conteudo_html = novo_html
-            substituicoes.append({
-                "Linha CSV": linha + 1,
-                "Coluna": coluna,
-                "Tag": tag,
-                "Valor Substituído": valor,
-                "Qtd. Substituições": n_subs
-            })
-    return conteudo_html, pd.DataFrame(substituicoes)
+st.markdown("Este aplicativo lê um **CSV com ofertas** e substitui as **TAGs do HTML** pelos valores correspondentes.")
 
-if arquivo_csv and arquivo_html:
-    try:
-        # Resetar ponteiro do CSV e ler
-        arquivo_csv.seek(0)
-        dados_csv = pd.read_csv(arquivo_csv, sep=sep)
-        dados_csv.columns = [col.strip() for col in dados_csv.columns]
+# Uploads
+uploaded_csv = st.file_uploader("Carregar arquivo CSV", type=["csv"])
+uploaded_html = st.file_uploader("Carregar arquivo HTML (modelo)", type=["html", "htm"])
 
-        # Ler HTML corretamente (sem perder buffer)
-        conteudo_html = arquivo_html.getvalue().decode("utf-8")
+# Seleção de modo
+modo_saida = st.radio(
+    "📌 Selecione o modo de saída:",
+    ["Um único HTML (todas as linhas)", "Vários HTMLs (um por linha do CSV)"],
+    help="Defina como deseja gerar o(s) HTML(s)."
+)
 
-        modo = st.radio(
-            "Modo de saída:",
-            ["🔹 Um único HTML (todas as linhas)", "🔹 Vários HTMLs (um por linha do CSV)"]
-        )
+# =========================
+# Explicação do Modo Único
+# =========================
+if modo_saida == "Um único HTML (todas as linhas)":
+    st.subheader("📖 Como funciona este modo?")
+    st.markdown("""
+    No modo **Um único HTML (todas as linhas)**, o aplicativo pega cada linha do CSV,
+    substitui as TAGs correspondentes no template, e junta tudo em um **único HTML consolidado**.
+    
+    Isso é útil quando você deseja ter **várias ofertas em uma mesma página** ou e-mail.
+    """)
 
-        if st.button("🚀 Modificar HTML"):
-            if modo.startswith("🔹 Um único"):
-                conteudo_modificado, relatorio = substituir_tags(conteudo_html, dados_csv)
+    # Exemplo de tabela colorida
+    st.markdown("### 🔎 Exemplo de funcionamento")
+    st.markdown("""
+    Abaixo, um exemplo simplificado com 3 linhas do CSV aplicadas ao mesmo HTML:
+    """)
+    
+    st.markdown("""
+    <table style="border-collapse: collapse; width: 100%; text-align: center;">
+      <tr>
+        <th style="border: 1px solid black; padding: 8px; background-color: #f4cccc;">##TITULO##</th>
+        <th style="border: 1px solid black; padding: 8px; background-color: #cfe2f3;">##PRECO##</th>
+        <th style="border: 1px solid black; padding: 8px; background-color: #d9ead3;">##DESCRICAO##</th>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black; padding: 8px;">Oferta A</td>
+        <td style="border: 1px solid black; padding: 8px;">R$ 100</td>
+        <td style="border: 1px solid black; padding: 8px;">Descrição da Oferta A</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black; padding: 8px;">Oferta B</td>
+        <td style="border: 1px solid black; padding: 8px;">R$ 200</td>
+        <td style="border: 1px solid black; padding: 8px;">Descrição da Oferta B</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black; padding: 8px;">Oferta C</td>
+        <td style="border: 1px solid black; padding: 8px;">R$ 300</td>
+        <td style="border: 1px solid black; padding: 8px;">Descrição da Oferta C</td>
+      </tr>
+    </table>
+    """, unsafe_allow_html=True)
 
-                st.success("✅ HTML modificado com sucesso!")
-                st.download_button(
-                    label="📥 Baixar HTML modificado",
-                    data=conteudo_modificado,
-                    file_name=f"personalizado_{arquivo_html.name}",
-                    mime="text/html"
-                )
+    # Legenda
+    st.markdown("""
+    **Legenda de cores:**
+    - 🟥 Vermelho claro → **##TITULO##** (será substituído pelo título da oferta)  
+    - 🟦 Azul claro → **##PRECO##** (será substituído pelo preço da oferta)  
+    - 🟩 Verde claro → **##DESCRICAO##** (será substituído pela descrição da oferta)  
+    """)
 
-                # Tabs para visualizar resultados
-                tab1, tab2, tab3 = st.tabs(["📊 Relatório", "🔎 Código HTML", "🌐 Preview"])
-                with tab1:
-                    st.dataframe(relatorio)
-                with tab2:
-                    st.code(conteudo_modificado, language="html")
-                with tab3:
-                    st.components.v1.html(conteudo_modificado, height=500, scrolling=True)
+# =========================
+# Processamento principal
+# =========================
+if uploaded_csv and uploaded_html:
+    df = pd.read_csv(uploaded_csv, sep=";", dtype=str)  # Lê CSV como string
+    template_html = uploaded_html.read().decode("utf-8")
 
-            else:
-                arquivos_zip = io.BytesIO()
-                with zipfile.ZipFile(arquivos_zip, mode="w") as zf:
-                    for i in range(len(dados_csv)):
-                        html_linha, _ = substituir_tags(conteudo_html, dados_csv.iloc[[i]])
-                        nome_arquivo = f"personalizado_linha{i+1}_{arquivo_html.name}"
-                        zf.writestr(nome_arquivo, html_linha)
-                arquivos_zip.seek(0)
+    st.subheader("📊 Pré-visualização do CSV")
+    st.dataframe(df.head())
 
-                st.success("✅ HTMLs individuais gerados com sucesso!")
-                st.download_button(
-                    label="📥 Baixar ZIP com todos os HTMLs",
-                    data=arquivos_zip,
-                    file_name="htmls_personalizados.zip",
-                    mime="application/zip"
-                )
+    if st.button("🚀 Gerar HTML"):
+        if modo_saida == "Um único HTML (todas as linhas)":
+            resultado = gerar_html_unico(df, template_html)
+            st.download_button("📥 Baixar HTML Consolidado", data=resultado, file_name="resultado.html", mime="text/html")
+            st.code(resultado[:1000] + "...", language="html")
 
-    except pd.errors.EmptyDataError:
-        st.error("❌ O arquivo CSV está vazio ou inválido.")
-    except pd.errors.ParserError:
-        st.error("❌ Erro ao analisar o CSV. Verifique o separador.")
-    except Exception as e:
-        st.error(f"⚠️ Erro inesperado: {str(e)}")
+        elif modo_saida == "Vários HTMLs (um por linha do CSV)":
+            htmls = gerar_varios_htmls(df, template_html)
+            for i, html in enumerate(htmls, start=1):
+                st.download_button(f"📥 Baixar HTML {i}", data=html, file_name=f"resultado_{i}.html", mime="text/html")
+                st.code(html[:500] + "...", language="html")
